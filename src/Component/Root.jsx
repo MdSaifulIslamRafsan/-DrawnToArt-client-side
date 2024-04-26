@@ -5,8 +5,9 @@ import Footer from "../SharedPage/Footer";
 
 const Root = () => {
     return (
+        
         <>
-         <nav className="mx-auto w-[95%] lg:w-10/12 max-w-[1440px]">
+         <nav className="fixed top-0 w-full z-50">
           <Navbar></Navbar>
          </nav>
           <Outlet></Outlet>

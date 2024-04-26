@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="lg:w-1/3">
             <p className="text-[18px] font-medium text-white"></p>
             <h1 className="text-white font-extrabold">
-              <span className="text-sm lg:text-2xl bg-300% font-bold bg-gradient-to-r from-primary via-blue-500 to-secondary text-transparent bg-clip-text animate-gradient">
+              <span className="text-2xl bg-300% font-bold bg-gradient-to-r from-primary via-blue-500 to-secondary text-transparent bg-clip-text animate-gradient">
                 DrawnToArt
               </span>
             </h1>
