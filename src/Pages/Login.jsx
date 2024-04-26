@@ -9,7 +9,7 @@ const Login = () => {
 
   return (
     <section className=" min-h-screen flex box-border justify-center items-center">
-      <div className="bg-white rounded-2xl flex max-w-3xl p-5 items-center">
+      <div className="bg-white rounded-2xl flex flex-col-reverse md:flex-row max-w-3xl p-5 items-center">
         <div className="md:w-1/2 px-8">
           <h2 className="font-bold text-3xl text-[#002D74]">Login</h2>
           <p className="text-sm mt-4 text-[#002D74]">
@@ -118,7 +118,7 @@ const Login = () => {
            <Link className="btn-link" to={"/register"}>Register</Link>
           </div>
         </div>
-        <div className="md:block hidden w-1/2">
+        <div className="w-1/2">
         <Lottie className="h-72" animationData={login} loop={true} />
         </div>
       </div>
