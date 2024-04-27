@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form"
 import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../assets/login.json";
 import Lottie from "lottie-react";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -10,6 +10,9 @@ import Swal from "sweetalert2";
 const Login = () => {
     const [isPassword , SetIsPassword] = useState(true);
     const {loginAccount , handleGoogleLogin , handleGithubLogin} = useContext(AuthContext);
+
+    const location = useLocation();
+    const navigate = useNavigate();
   
   const {
     register,
@@ -37,6 +40,7 @@ const Login = () => {
 
     loginAccount(email, password)
     .then(() => {
+      navigate(location?.state ? location?.state : '/' );
       Swal.fire({
         title: "Good job!",
         text:  "You've successfully logged in. Let's get started!",
@@ -97,7 +101,7 @@ const Login = () => {
             <hr className="border-gray-300" />
           </div>
           <button
-          onClick={handleGoogleLogin}
+          onClick={()=>handleGoogleLogin(navigate , location)}
           type="button"
           className="py-4 text-white text-sm lg:text-base hover:animate__animated hover:animate__headShake  px-5 mb-4 mt-8 mx-auto block shadow-lg border rounded-md border-black"
         >
@@ -155,7 +159,7 @@ const Login = () => {
           Continue with Google
         </button>
         <button
-        onClick={handleGithubLogin}
+        onClick={()=>handleGithubLogin(navigate , location)}
           type="button"
           className="py-4 flex text-white text-sm lg:text-base hover:animate__animated hover:animate__headShake  px-5 mb-4 mt-8 mx-auto item-center gap-2  shadow-lg border rounded-md border-black"
         >

@@ -4,6 +4,8 @@ import Root from "../Component/Root";
 import Error from "../Pages/Error"
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import PrivateRoute from "../Component/Private/PrivateRoute";
+import AddCraftItem from "../Pages/AddCraftItem";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +20,10 @@ const router = createBrowserRouter([
         {
           path: "/register",
           element: <Register></Register>,
+        },
+        {
+          path: "/AddCraftItem",
+          element: <PrivateRoute><AddCraftItem></AddCraftItem></PrivateRoute>,
         },
         
     ]
