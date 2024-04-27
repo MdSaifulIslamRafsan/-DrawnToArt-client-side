@@ -1,25 +1,74 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form"
 import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import login from "../assets/login.json";
 import Lottie from "lottie-react";
+import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [isPassword , SetIsPassword] = useState(true);
+    const {loginAccount , handleGoogleLogin , handleGithubLogin} = useContext(AuthContext);
+  
+  const {
+    register,
+    handleSubmit,
+  } = useForm();
+  const onSubmit = (data) => {
+    const {email , password} = data;
+
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid email format. Please use the format: example@example.com",
+      });
+    }
+
+    if(!/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password)){
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text:  "Password must be at least 6 characters long and contain at least one uppercase letter and one lowercase letter.",
+      });
+    }
+    
+
+    loginAccount(email, password)
+    .then(() => {
+      Swal.fire({
+        title: "Good job!",
+        text:  "You've successfully logged in. Let's get started!",
+        icon: "success"
+      });
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: errorMessage,
+      });
+    });
+   
+
+  }
 
   return (
-    <section className=" min-h-screen flex box-border justify-center items-center">
-      <div className="bg-white rounded-2xl flex flex-col-reverse md:flex-row max-w-3xl p-5 items-center">
+    <section className="min-h-screen  flex box-border justify-center items-center">
+      <div className="bg-gray-900  rounded-2xl flex flex-col-reverse md:flex-row w-10/12 p-5 items-center">
         <div className="md:w-1/2 px-8">
-          <h2 className="font-bold text-3xl text-[#002D74]">Login</h2>
-          <p className="text-sm mt-4 text-[#002D74]">
+          <h2 className="font-bold text-white text-3xl ">Login</h2>
+          <p className="text-sm text-white mt-4 ">
             If you already a member, easily log in now.
           </p>
-          <form action="" className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <input
               className="p-2 mt-8 rounded-xl border"
               type="email"
               name="email"
+              {...register("email")}
               placeholder="Email"
             />
             <div className="relative">
@@ -27,6 +76,7 @@ const Login = () => {
                 className="p-2 rounded-xl border w-full"
                 type={isPassword ? "password" : "text "}
                 name="password"
+                {...register("password")}
                 id="password"
                 placeholder="Password"
               />
@@ -41,19 +91,20 @@ const Login = () => {
               Login
             </button>
           </form>
-          <div className="mt-6  items-center text-gray-900">
+          <div className="mt-6 items-center">
             <hr className="border-gray-300" />
             <p className="text-center text-sm">OR</p>
             <hr className="border-gray-300" />
           </div>
           <button
+          onClick={handleGoogleLogin}
           type="button"
-          className="py-4 text-sm lg:text-base hover:animate__animated hover:animate__headShake  px-5 mb-4 mt-8 mx-auto block shadow-lg border rounded-md border-black"
+          className="py-4 text-white text-sm lg:text-base hover:animate__animated hover:animate__headShake  px-5 mb-4 mt-8 mx-auto block shadow-lg border rounded-md border-black"
         >
           <svg
             viewBox="-0.5 0 48 48"
             version="1.1"
-            className="w-5 inline-block mr-3"
+            className="w-5 inline-block mr-3 text-white"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             fill="#000000"
@@ -104,17 +155,18 @@ const Login = () => {
           Continue with Google
         </button>
         <button
+        onClick={handleGithubLogin}
           type="button"
-          className="py-4 flex text-sm lg:text-base hover:animate__animated hover:animate__headShake  px-5 mb-4 mt-8 mx-auto item-center gap-2  shadow-lg border rounded-md border-black"
+          className="py-4 flex text-white text-sm lg:text-base hover:animate__animated hover:animate__headShake  px-5 mb-4 mt-8 mx-auto item-center gap-2  shadow-lg border rounded-md border-black"
         >
           <FaGithub className="text-2xl"></FaGithub>
           Continue with Github
         </button>
-          <div className=" text-sm  py-5 playfair tooltip">
+          <div className="text-sm text-white py-5 playfair tooltip">
             Forget password?
           </div>
           <div className="mt-4 text-sm flex items-center">
-            <p className="mr-3 md:mr-0 ">If you don't have an account..</p>
+            <p className="mr-3 md:mr-0 text-white">If you don't have an account..</p>
            <Link className="btn-link" to={"/register"}>Register</Link>
           </div>
         </div>

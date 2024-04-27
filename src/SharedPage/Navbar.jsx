@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
-
-  const {  user} = useContext(AuthContext);
-console.log(user);
+  const { user  , handleLogout } = useContext(AuthContext);
 
   const NavbarLink = (
     <>
@@ -25,7 +24,7 @@ console.log(user);
   );
 
   return (
-    <div className="mx-auto max-w-[1440px] lg:w-10/12">
+    <div className="mx-auto max-w-[1440px]  lg:w-10/12">
       <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
@@ -59,25 +58,43 @@ console.log(user);
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{NavbarLink}</ul>
         </div>
-        <div className="navbar-end space-x-3">
-          <Link
-            to={"/login"}
-            className="rounded px-5 py-2 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
-          >
-            <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-            <span className="relative">Login</span>
-          </Link>
+          {user ? (
+            <div className="avatar navbar-end">
+              <div  className="w-10 cursor-pointer rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+              <a id="clickable"> <img src={user?.photoURL} /></a>
+                <Tooltip anchorSelect="#clickable" clickable place="bottom">
+                <p>{user?.email}</p>
+                <button onClick={handleLogout}
+                className="rounded mt-4 px-5 py-2 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+              >
+                <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                <span className="relative">Logout</span>
+              </button>
+              </Tooltip>
+              </div>
+             
+            </div>
+          ) : (
+            <div className="space-x-3 navbar-end">
+              <Link
+                to={"/login"}
+                className="rounded px-5 py-2 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+              >
+                <span className="absolute right-0 w-8 h-8 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                <span className="relative">Login</span>
+              </Link>
 
-          <Link
-            to={"/register"}
-            className="rounded px-5 py-2 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
-          >
-            <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-            <span className="relative">Register</span>
-          </Link>
+              <Link
+                to={"/register"}
+                className="rounded px-5 py-2 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+              >
+                <span className="absolute right-0 w-8 h-8 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                <span className="relative">Register</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
-    </div>
   );
 };
 

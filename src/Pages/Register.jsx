@@ -11,12 +11,12 @@ import Swal from "sweetalert2";
 
 const Register = () => {
   const [isPassword , SetIsPassword] = useState(true);
-  const {createAccount ,  user} = useContext(AuthContext);
-console.log(user);
+  const {createAccount} = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
-  } = useForm()
+  } = useForm();
 
   const onSubmit = (data) => {
     const {name, email , photoURL , password} = data;
@@ -79,20 +79,20 @@ console.log(user);
     <>
       {/* source: https://gist.github.com/nraloux/bce10c4148380061781b928cdab9b193 */}
       {/* I have added support for dark mode and improved UI */}
-      <div className="h-full bg-gray-400 dark:bg-gray-900">
+      <div className="h-full rounded-xl bg-gray-900">
         {/* Container */}
         <div className="mx-auto">
           <div className="flex justify-center px-6 py-12">
             {/* Row */}
-            <div className="w-full xl:w-3/4 lg:w-11/12 flex flex-col lg:flex-row">
+            <div className="w-full  lg:w-11/12 flex flex-col lg:flex-row">
               {/* Col */}
               <Lottie animationData={registerAnimation} loop={true} />
               {/* Col */}
-              <div className="w-full lg:w-7/12 bg-white dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
-                <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
+              <div className="w-full lg:w-7/12 bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
+                <h3 className="py-4 text-2xl text-center text-white">
                   Create an Account!
                 </h3>
-                <form onSubmit={handleSubmit(onSubmit)} className="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded">
+                <form onSubmit={handleSubmit(onSubmit)} className="px-8 pt-6 pb-8 mb-4 bg-gray-800 rounded">
                   <div className="mb-4">
                     <label
                       className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
@@ -102,7 +102,7 @@ console.log(user);
                     </label>
                     <input
                     {...register("name")}
-                      className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      className="w-full px-3 py-3 mb-3 text-sm leading-tight  border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                       id="name"
                       type="text"
                       name="name"
@@ -111,14 +111,14 @@ console.log(user);
                   </div>
                   <div className="mb-4">
                     <label
-                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                      className="block mb-2 text-sm font-bold"
                       htmlFor="email"
                     >
                       Email
                     </label>
                     <input
                     {...register("email")}
-                      className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      className="w-full px-3 py-3 mb-3 text-sm leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                       id="email"
                       type="email"
                       name="email"
@@ -127,14 +127,14 @@ console.log(user);
                   </div>
                   <div className="mb-4">
                     <label
-                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                      className="block mb-2 text-sm font-bold"
                       htmlFor="photoURL"
                     >
                       PhotoURL
                     </label>
                     <input
                     {...register("photoURL")}
-                      className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      className="w-full px-3 py-3 mb-3 text-sm leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                       id="photoURL"
                       type="text"
                       name="photoURL"
@@ -150,14 +150,14 @@ console.log(user);
                     </label>
                     <input
                     {...register("password")}
-                      className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      className="w-full px-3 py-3 mb-3 text-sm leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                       id="password"
                       type={isPassword ? "password" : "text "}
                       name="password"
                       placeholder="Password"
                     />
                      <span onClick={()=> SetIsPassword(!isPassword)} className="absolute top-1/2 right-2 ">
-                    {isPassword ? <FaEye /> : <FaEyeSlash />}
+                    {isPassword ? <FaEye  /> : <FaEyeSlash  />}
                 </span>
                   </div>
 
@@ -172,7 +172,7 @@ console.log(user);
                   <hr className="mb-6 border-t" />
 
                   <div className="text-center">
-                    <p>
+                    <p className="text-white">
                       Already have an account?{" "}
                       <Link className="btn-link" to={"/login"}>
                         Login
