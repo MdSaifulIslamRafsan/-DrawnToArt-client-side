@@ -110,7 +110,7 @@ const Login = () => {
           <FaGithub className="text-2xl"></FaGithub>
           Continue with Github
         </button>
-          <div className="mt-10 text-sm border-b border-gray-500 py-5 playfair tooltip">
+          <div className=" text-sm  py-5 playfair tooltip">
             Forget password?
           </div>
           <div className="mt-4 text-sm flex items-center">

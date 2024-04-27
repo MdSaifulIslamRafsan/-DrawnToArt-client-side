@@ -1,6 +1,12 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
+
+  const {  user} = useContext(AuthContext);
+console.log(user);
+
   const NavbarLink = (
     <>
       <li>
@@ -19,8 +25,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className=" mx-auto w-[95%] max-w-[1440px] lg:w-10/12">
-      <div className="navbar bg-base-100">
+    <div className="mx-auto max-w-[1440px] lg:w-10/12">
+      <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
