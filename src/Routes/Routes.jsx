@@ -6,6 +6,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "../Component/Private/PrivateRoute";
 import AddCraftItem from "../Pages/AddCraftItem";
+import Home from './../Pages/Home';
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
       element: <Root></Root>,
       errorElement: <Error></Error>,
       children: [
+        {
+          path: "/",
+          element: <Home></Home>,
+        },
         {
           path: "/login",
           element: <Login></Login>,
