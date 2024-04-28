@@ -120,7 +120,7 @@ const Navbar = () => {
                 </svg>
               </label>
               <div  className="w-10 cursor-pointer rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <a id="clickable"> <img src={user?.photoURL} /></a>
+                <img id="clickable" src={user?.photoURL} />
                 <Tooltip anchorSelect="#clickable" clickable place="bottom">
                 <p>{user?.email}</p>
                 <button onClick={handleLogout}

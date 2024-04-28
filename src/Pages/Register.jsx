@@ -95,7 +95,7 @@ const Register = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="px-8 pt-6 pb-8 mb-4 bg-gray-800 rounded">
                   <div className="mb-4">
                     <label
-                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                      className="block mb-2 text-sm font-bold text-white"
                       htmlFor="name"
                     >
                       Name
@@ -111,7 +111,7 @@ const Register = () => {
                   </div>
                   <div className="mb-4">
                     <label
-                      className="block mb-2 text-sm font-bold"
+                      className="block text-white mb-2 text-sm font-bold"
                       htmlFor="email"
                     >
                       Email
@@ -127,7 +127,7 @@ const Register = () => {
                   </div>
                   <div className="mb-4">
                     <label
-                      className="block mb-2 text-sm font-bold"
+                      className="block text-white mb-2 text-sm font-bold"
                       htmlFor="photoURL"
                     >
                       PhotoURL
@@ -143,7 +143,7 @@ const Register = () => {
                   </div>
                   <div className="mb-4 relative">
                     <label
-                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                      className="block mb-2 text-sm font-bold text-white"
                       htmlFor="password"
                     >
                       Password
