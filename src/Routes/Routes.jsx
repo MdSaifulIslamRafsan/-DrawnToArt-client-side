@@ -7,6 +7,7 @@ import Register from "../Pages/Register";
 import PrivateRoute from "../Component/Private/PrivateRoute";
 import AddCraftItem from "../Pages/AddCraftItem";
 import Home from './../Pages/Home';
+import DetailsPage from "../Pages/DetailsPage";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
         {
           path: "/AddCraftItem",
           element: <PrivateRoute><AddCraftItem></AddCraftItem></PrivateRoute>,
+        },
+        {
+          path: "/craftDetails/:id",
+          element: <PrivateRoute><DetailsPage></DetailsPage></PrivateRoute>,
+          loader: () => fetch("http://localhost:5000/craftItems")
         },
         
     ]

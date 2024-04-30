@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Home = () => {
   const craftItems = useLoaderData();
@@ -207,9 +207,9 @@ const Home = () => {
           Explore our Craft Items section for a treasure trove of supplies, from colorful beads to premium yarn, perfect for unleashing your creativity.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 my-10 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 my-10 mx-5 gap-10">
           {
-            craftItems.map(craftItem => <div key={craftItem?._id} className=" rounded-lg overflow-hidden shadow-lg ring-4 ring-red-500 ring-opacity-40 max-w-sm">
+            craftItems.slice(0,6).map(craftItem => <div key={craftItem?._id} className=" rounded-lg overflow-hidden shadow-lg ring-4 ring-red-500 ring-opacity-40 max-w-sm">
             <div className="relative">
               <img
                 className="w-full h-52"
@@ -226,9 +226,9 @@ const Home = () => {
               </p>
               <div className="flex items-center justify-between">
                 <span className="font-bold text-lg">${craftItem?.price}</span>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                <Link to={`/craftDetails/${craftItem?._id}`} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                 View Details
-                </button>
+                </Link>
               </div>
             </div>
           </div>)
