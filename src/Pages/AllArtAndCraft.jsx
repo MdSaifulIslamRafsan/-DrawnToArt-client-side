@@ -1,6 +1,12 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
+import loading from "../assets/loading.json";
+import Lottie from "lottie-react";
 const AllArtAndCraft = () => {
   const craftItems = useLoaderData();
+  const navigation = useNavigation();
+  if(navigation.state === "loading"){
+    return <Lottie className="h-72" animationData={loading} loop={true} />
+  }
   return (
     <div className="overflow-x-auto">
       <table className="table">

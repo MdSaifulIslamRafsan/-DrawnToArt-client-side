@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
-
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
+import loading from "../assets/loading.json";
+import Lottie from "lottie-react";
 const Home = () => {
   const craftItems = useLoaderData();
 
@@ -129,6 +130,10 @@ const Home = () => {
       currentSlider1 === sliders1.length - 1 ? 0 : currentSlider1 + 1
     );
 
+    const navigation = useNavigation();
+    if(navigation.state === "loading"){
+      return <Lottie className="h-72" animationData={loading} loop={true} />
+    }
   return (
     <>
       <section>

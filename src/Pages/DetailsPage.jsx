@@ -14,19 +14,19 @@ const DetailsPage = () => {
 		<img src={image} alt="" className="w-full h-60 sm:h-96 dark:bg-gray-500" />
 		<div className="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6  sm:px-10 sm:mx-12 lg:rounded-md bg-gray-900">
 			<div className="space-y-2">
-				<a rel="noopener noreferrer" href="#" className="inline-block text-2xl font-semibold sm:text-3xl">{subcategory_Name}</a>
-				<p className="text-sm">{item_name}
+				<p className="inline-block text-white text-2xl font-semibold sm:text-3xl">{subcategory_Name}</p>
+				<p className="text-sm text-white">{item_name}
 				</p>
 			</div>
 			<div className="space-y-3">
-				<p>{description}</p>
-				<p> User Name :- {name}</p>
-				<p> User Email :-  {email}</p>
-				<p>Price :- {price}$</p>
-				<p>Processing Time :- {processing_time}</p>
-				<p>Rating :- {rating}</p>
-				<p>Customization :- {customization}</p>
-				<p>StockStatus :- {stockStatus}</p>
+				<p className="text-white">{description}</p>
+				<p className="text-white"> User Name :- {name}</p>
+				<p className="text-white"> User Email :-  {email}</p>
+				<p className="text-white">Price :- {price}$</p>
+				<p className="text-white">Processing Time :- {processing_time}</p>
+				<p className="text-white">Rating :- {rating}</p>
+				<p className="text-white">Customization :- {customization}</p>
+				<p className="text-white">StockStatus :- {stockStatus}</p>
                 
 			</div>
 		</div>

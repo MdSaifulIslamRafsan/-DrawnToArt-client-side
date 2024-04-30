@@ -1,20 +1,26 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import { TbCurrencyTaka } from "react-icons/tb";
 import Swal from "sweetalert2";
+import loading from "../assets/loading.json";
+import Lottie from "lottie-react";
 
 const MyArtAndCarftList = () => {
   const { user } = useContext(AuthContext);
-  const craftItems = useLoaderData();
-  let isExist = craftItems.filter((item) => item?.email === user?.email);
-//   const [display , setDisplay] = useState([]);
-//   setDisplay(isExist);
+  const loadedCraftItems = useLoaderData();
+  let isExist = loadedCraftItems.filter((item) => item?.email === user?.email);
+
+  const [craftItems ,  setCraftItems] = useState(isExist);
+
   
-  
+  const navigation = useNavigation();
+  if(navigation.state === "loading"){
+    return <Lottie className="h-72" animationData={loading} loop={true} />
+  }
 
 
-  const handleCustomization = (value) => {
+  /* const handleCustomization = (value) => {
     console.log(value);
     if (value === "yes") {
          isExist.filter(item => item?.customization === "Yes")
@@ -23,7 +29,7 @@ const MyArtAndCarftList = () => {
         isExist.filter(item => item?.customization === "No")
     }
   };
-
+ */
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -47,6 +53,8 @@ const MyArtAndCarftList = () => {
                     text: "Your file has been deleted.",
                     icon: "success"
                 });
+                const remaining = craftItems.filter(item=> item?._id !== id);
+                setCraftItems(remaining);
             }
         })
         }
@@ -71,7 +79,7 @@ const MyArtAndCarftList = () => {
         </details>
      
       </div>
-      {isExist.map((item) => (
+      {craftItems.map((item) => (
         <div
           key={item?._id}
           className=" mx-auto bg-white rounded-xl shadow-md overflow-hidden my-5"
