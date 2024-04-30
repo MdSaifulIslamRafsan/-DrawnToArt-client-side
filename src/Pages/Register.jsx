@@ -16,9 +16,11 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    reset
   } = useForm();
 
   const onSubmit = (data) => {
+    reset();
     const {name, email , photoURL , password} = data;
 
     if (!/^[a-zA-Z\-\'\s]+$/.test(name)){

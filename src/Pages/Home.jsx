@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 const Home = () => {
+  const craftItems = useLoaderData();
+
+
   const array = [
     {
       name: "John Doe",
@@ -106,38 +110,132 @@ const Home = () => {
     },
   ];
   const [currentSlider1, setCurrentSlider1] = useState(0);
-  const sliders1 = [{img: "https://i.ibb.co/zfGD3mq/premium-photo-1673514503540-95388063816e.jpg", tags: "Landscape Painting",}, {img: "https://i.ibb.co/nMsk2X9/premium-photo-1677609961902-76b7e94c0172.jpg", tags: "Portrait Drawing",}, {img: "https://i.ibb.co/FBCqCn8/photo-1594136976553-38699ae9047c.jpg", tags: "Watercolour Painting",}];
-    const nextSlider1 = () => setCurrentSlider1((currentSlider1) => (currentSlider1 === sliders1.length - 1 ? 0 : currentSlider1 + 1));
-    
+  const sliders1 = [
+    {
+      img: "https://i.ibb.co/zfGD3mq/premium-photo-1673514503540-95388063816e.jpg",
+      tags: "Landscape Painting",
+    },
+    {
+      img: "https://i.ibb.co/nMsk2X9/premium-photo-1677609961902-76b7e94c0172.jpg",
+      tags: "Portrait Drawing",
+    },
+    {
+      img: "https://i.ibb.co/FBCqCn8/photo-1594136976553-38699ae9047c.jpg",
+      tags: "Watercolour Painting",
+    },
+  ];
+  const nextSlider1 = () =>
+    setCurrentSlider1((currentSlider1) =>
+      currentSlider1 === sliders1.length - 1 ? 0 : currentSlider1 + 1
+    );
+
   return (
     <>
-    <section>
-    
+      <section>
         <div className=" mx-auto px-3 lg:px-10 flex flex-col lg:flex-row items-center justify-center overflow-hidden gap-5 lg:gap-10 relative">
-        <div className=" w-full absolute left-0  -z-40"></div>
-        <div className=" lg:w-1/3 text-center lg:text-left space-y-2 lg:space-y-5 py-5">
-            <h1 className="text-lg  md:text-2xl lg:text-[40px] font-bold">50+ Beautiful Painting and Drawing inspiration</h1>
-            <p className="text-xs md:text-lg">Dive into a world of boundless creativity and inspiration. Unleash your artistic vision with our comprehensive painting and drawing resources.</p>
-        </div>
-        <div className="w-[95%] flex items-center relative overflow-hidden">
+          <div className=" w-full absolute left-0  -z-40"></div>
+          <div className=" lg:w-1/3 text-center lg:text-left space-y-2 lg:space-y-5 py-5">
+            <h1 className="text-lg  md:text-2xl lg:text-[40px] font-bold">
+              50+ Beautiful Painting and Drawing inspiration
+            </h1>
+            <p className="text-xs md:text-lg">
+              Dive into a world of boundless creativity and inspiration. Unleash
+              your artistic vision with our comprehensive painting and drawing
+              resources.
+            </p>
+          </div>
+          <div className="w-[95%] flex items-center relative overflow-hidden">
             {/* arrow */}
-            <button onClick={nextSlider1} className="absolute flex justify-center items-center right-2 top-1/2 bg-white rounded-full z-20 w-6 h-6 md:w-8 md:h-8 bgWhite ">
-                <svg viewBox="0 0 1024 1024" className="w-4 h-4 md:w-6 md:h-6 icon" xmlns="http://www.w3.org/2000/svg" fill="#000000" transform="rotate(180)"><g strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#0095FF" d="M685.248 104.704a64 64 0 010 90.496L368.448 512l316.8 316.8a64 64 0 01-90.496 90.496L232.704 557.248a64 64 0 010-90.496l362.048-362.048a64 64 0 0190.496 0z"></path></g></svg>
+            <button
+              onClick={nextSlider1}
+              className="absolute flex justify-center items-center right-2 top-1/2 bg-white rounded-full z-20 w-6 h-6 md:w-8 md:h-8 bgWhite "
+            >
+              <svg
+                viewBox="0 0 1024 1024"
+                className="w-4 h-4 md:w-6 md:h-6 icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000000"
+                transform="rotate(180)"
+              >
+                <g strokeWidth="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    fill="#0095FF"
+                    d="M685.248 104.704a64 64 0 010 90.496L368.448 512l316.8 316.8a64 64 0 01-90.496 90.496L232.704 557.248a64 64 0 010-90.496l362.048-362.048a64 64 0 0190.496 0z"
+                  ></path>
+                </g>
+              </svg>
             </button>
             {/* slider container */}
-            <div className="ease-linear duration-300 flex gap-[2%]" style={{ transform: `translateX(-${currentSlider1 * 52}%)` }}>
-                {/* sliders */}
-                {sliders1.map((slide, inx) => (
-                    <div key={inx}
-                        className={`${currentSlider1 === inx ? 'h-[310px] md:h-[310px] lg:h-[580px] ' : 'h-[260px] md:h-[280px] lg:h-[480px]'} min-w-[50%] bg-black/30 relative duration-200`}
-                    >
-                        <img src={slide.img} className="w-full h-full" alt={slide.tags} />
-                    </div>
-                ))}
+            <div
+              className="ease-linear duration-300 flex gap-[2%]"
+              style={{ transform: `translateX(-${currentSlider1 * 52}%)` }}
+            >
+              {/* sliders */}
+              {sliders1.map((slide, inx) => (
+                <div
+                  key={inx}
+                  className={`${
+                    currentSlider1 === inx
+                      ? "h-[310px] md:h-[310px] lg:h-[580px] "
+                      : "h-[260px] md:h-[280px] lg:h-[480px]"
+                  } min-w-[50%] bg-black/30 relative duration-200`}
+                >
+                  <img
+                    src={slide.img}
+                    className="w-full h-full"
+                    alt={slide.tags}
+                  />
+                </div>
+              ))}
             </div>
+          </div>
         </div>
-    </div>
-    </section>
+      </section>
+
+      <section>
+      <div className="text-center mx-auto my-10 space-y-3 w-11/12 lg:w-2/3">
+          <h1 className="text-xl lg:text-3xl font-bold">
+              Craft Items
+          </h1>
+          <p>
+          Explore our Craft Items section for a treasure trove of supplies, from colorful beads to premium yarn, perfect for unleashing your creativity.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 my-10 gap-10">
+          {
+            craftItems.map(craftItem => <div key={craftItem?._id} className=" rounded-lg overflow-hidden shadow-lg ring-4 ring-red-500 ring-opacity-40 max-w-sm">
+            <div className="relative">
+              <img
+                className="w-full h-52"
+                src={craftItem?.image}
+              />
+              <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+              {craftItem?.stockStatus}
+              </div>
+            </div>
+            <div className="p-4">
+              <h3 className="text-lg font-medium mb-2">{craftItem?.subcategory_Name}</h3>
+              <p className="text-gray-600 text-sm mb-4">
+              {craftItem?.description}
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-lg">${craftItem?.price}</span>
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                View Details
+                </button>
+              </div>
+            </div>
+          </div>)
+          }
+        </div>
+      </section>
+
       <section>
         <div className="text-center mx-auto my-10 space-y-3 w-11/12 lg:w-2/3">
           <h1 className="text-xl lg:text-3xl font-bold">What Our Client Say</h1>
@@ -249,8 +347,14 @@ const Home = () => {
       </section>
       <section>
         <div className="text-center mx-auto my-10 space-y-3 w-11/12 lg:w-2/3">
-          <h1 className="text-xl lg:text-3xl font-bold">Explore Common Questions</h1>
-          <p>Explore answers to common queries about painting and drawing techniques, materials, and more. Get expert insights and guidance to enhance your artistic journey</p>
+          <h1 className="text-xl lg:text-3xl font-bold">
+            Explore Common Questions
+          </h1>
+          <p>
+            Explore answers to common queries about painting and drawing
+            techniques, materials, and more. Get expert insights and guidance to
+            enhance your artistic journey
+          </p>
         </div>
         <div className="space-y-4 p-2 md:p-6">
           {datas?.map((data, idx) => (

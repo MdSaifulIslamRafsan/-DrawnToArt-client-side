@@ -17,8 +17,10 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    reset
   } = useForm();
   const onSubmit = (data) => {
+    reset();
     const {email , password} = data;
 
     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
