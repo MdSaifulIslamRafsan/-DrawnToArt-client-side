@@ -1,16 +1,19 @@
-import { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
+import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddCraftItem = () => {
-  const { user } = useContext(AuthContext);
-  const { register, handleSubmit ,  reset} = useForm();
 
+const Update = () => {
+
+    const { register, handleSubmit ,  reset} = useForm();
+    const {id} = useParams();
+    const craftItems =  useLoaderData();
+    const isExist = craftItems.find(craftItem => craftItem?._id === id);
+    const { _id,customization , description , email , image , item_name , name , price , processing_time , rating , stockStatus , subcategory_Name } = isExist;
   const onSubmit = (data) => {
     reset();
-    fetch("https://server-side-teal.vercel.app/craftItems", {
-      method: "POST",
+    fetch(`https://server-side-teal.vercel.app/craftItems/${_id}`, {
+      method: "PUT",
       headers: {
         'content-type' : 'application/json'
       },
@@ -18,20 +21,19 @@ const AddCraftItem = () => {
     })
     .then(res => res.json())
     .then(data => {
-     if(data.insertedId){
+     if(data.modifiedCount > 0){
       Swal.fire({
         title: "Good job!",
-        text:  "Document successfully inserted into the collection.",
+        text:  "Document updated successfully.",
         icon: "success"
       });
      }
     })
   };
-
-  return (
-    <div className=" border-4 rounded-lg shadow relative m-4">
+    return (
+        <div className=" border-4 rounded-lg shadow relative m-4">
       <div className="flex items-start justify-between p-5 border-b rounded-t">
-        <h3 className="text-2xl mx-auto font-semibold">Add Craft Item Page</h3>
+        <h3 className="text-2xl mx-auto font-semibold">Update Item Page</h3>
       </div>
       <div className="p-6 space-y-6">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -45,10 +47,11 @@ const AddCraftItem = () => {
                 type="text"
                 name="name"
                 id="name"
+                defaultValue={name}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                 placeholder="user name"
                 required=""
-                defaultValue={user?.displayName}
+                
               />
             </div>
             <div className="col-span-6 sm:col-span-3">
@@ -60,7 +63,8 @@ const AddCraftItem = () => {
                 type="email"
                 name="email"
                 id="email"
-                defaultValue={user?.email}
+                defaultValue={email}
+                
                 className="shadow-sm text-gray-900 bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                 placeholder="user email"
                 required=""
@@ -76,6 +80,7 @@ const AddCraftItem = () => {
                 type="text"
                 name="image"
                 id="image"
+                defaultValue={image}
                 className="shadow-sm text-gray-900 bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                 placeholder="image URL"
                 required=""
@@ -93,6 +98,7 @@ const AddCraftItem = () => {
                 type="text"
                 name="item_name"
                 id="item_name"
+                defaultValue={item_name}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                 placeholder="item name"
                 required=""
@@ -108,6 +114,7 @@ const AddCraftItem = () => {
                 id="subcategory_Name"
                 {...register("subcategory_Name")}
                 name="subcategory_Name"
+                defaultValue={subcategory_Name}
                 className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
                 required=""
               >
@@ -132,6 +139,7 @@ const AddCraftItem = () => {
                 type="number"
                 name="price"
                 id="price"
+                defaultValue={price}
                 className="shadow-sm text-gray-900 bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                 placeholder="price"
               />
@@ -147,6 +155,7 @@ const AddCraftItem = () => {
                 {...register("processing_time")}
                 type="text"
                 name="processing_time"
+                defaultValue={processing_time}
                 id="processing_time"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                 placeholder="processing_time"
@@ -164,6 +173,7 @@ const AddCraftItem = () => {
                 {...register("rating")}
                 type="number"
                 name="rating"
+                defaultValue={rating}
                 id="rating"
                 className="shadow-sm text-gray-900 bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                 placeholder="rating"
@@ -177,6 +187,7 @@ const AddCraftItem = () => {
                 id="customization"
                 {...register("customization")}
                 name="customization"
+                defaultValue={customization}
                 className="border  border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
                 required=""
               >
@@ -195,6 +206,7 @@ const AddCraftItem = () => {
                 id="stockStatus"
                 {...register("stockStatus")}
                 name="stockStatus"
+                defaultValue={stockStatus}
                 className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400"
                 required=""
               >
@@ -217,6 +229,7 @@ const AddCraftItem = () => {
                 {...register("description")}
                 id="description"
                 name="description"
+                defaultValue={description}
                 rows={6}
                 className="bg-gray-50 border text-gray-900 border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
                 placeholder=" short description"
@@ -228,13 +241,13 @@ const AddCraftItem = () => {
               className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-20 mx-auto block py-2.5 text-center"
               type="submit"
             >
-              Add
+              Update
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
+    );
 };
 
-export default AddCraftItem;
+export default Update;

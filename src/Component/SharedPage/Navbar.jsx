@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider";
 import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
@@ -35,7 +35,7 @@ const Navbar = () => {
         <NavLink to={"/AddCraftItem"}>Add Craft Item</NavLink>
       </li>
       <li>
-        <NavLink to={"MyArt&CraftList"}>My Art&Craft List</NavLink>
+        <NavLink to={"/MyArt&CraftList"}>My Art&Craft List</NavLink>
       </li>
     </>
   );

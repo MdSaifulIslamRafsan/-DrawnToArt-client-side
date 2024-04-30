@@ -6,7 +6,6 @@ const DetailsPage = () => {
     const craftItems = useLoaderData();
     
     const isExist = craftItems.find(craftItem => craftItem?._id === id);
-    console.log(isExist);
     const {customization , description , email , image , item_name , name, price , processing_time , rating ,  stockStatus , subcategory_Name} = isExist;
 
     return (

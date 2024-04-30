@@ -198,7 +198,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section>
+      <section className="my-20">
       <div className="text-center mx-auto my-10 space-y-3 w-11/12 lg:w-2/3">
           <h1 className="text-xl lg:text-3xl font-bold">
               Craft Items
@@ -220,7 +220,7 @@ const Home = () => {
               </div>
             </div>
             <div className="p-4">
-              <h3 className="text-lg font-medium mb-2">{craftItem?.subcategory_Name}</h3>
+              <h3 className="text-lg font-medium mb-2">{craftItem?.item_name}</h3>
               <p className="text-gray-600 text-sm mb-4">
               {craftItem?.description}
               </p>
