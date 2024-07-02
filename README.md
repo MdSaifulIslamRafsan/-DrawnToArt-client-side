@@ -1,9 +1,13 @@
 
 Website Name: DrawnToArt
 
+Category's Name : Painting and Drawing
+
 Live Site URL: https://assignment-no-10-drawntoart.netlify.app/
 
-Category's Name : Painting and Drawing
+server-side :-  https://github.com/MdSaifulIslamRafsan/-DrawnToArt-server-side
+
+
 
 ## Overview
 
@@ -61,5 +65,3 @@ npm run dev
 - Backend: Express
 - Database: MongoDB
 - Hosting & Authentication: Firebase
-- Token Management: JWT (JSON Web Tokens)
-
