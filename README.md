@@ -5,23 +5,61 @@ Live Site URL: https://assignment-no-10-drawntoart.netlify.app/
 
 Category's Name : Painting and Drawing
 
-- Implement responsive design for mobile, tablet, and desktop views.
+## Overview
 
-- Utilize environment variables to securely store Firebase config keys and MongoDB credentials.
+The project is a painting and drawing-related website aimed at providing a platform for artists of all levels to explore, create, and share their passion for visual art. It offers a range of features and functionalities tailored to cater to the diverse needs and interests of the artistic community.
 
-- Design a creative and unique website, differentiating it from past projects or existing templates.
+## Installation Steps:- 
 
-- Conditionally display login and register buttons based on user authentication status.
+- Clone the Repository:
 
-- Create an "All Art & Craft Items" page to view items added by users in a table format with view details buttons.
+```sh
+git clone https://github.com/MdSaifulIslamRafsan/-DrawnToArt-client-side.git
+cd -DrawnToArt-client-side
+```
 
-- Design a "View Details" page for individual craft items, accessible through a private/protected route, displaying all stored information.
+- Install Dependencies:
 
-# React + Vite
+```sh
+npm install
+```
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Set Up Environment Variables:
+Create a .env file in the root directory and add the following:
 
-Currently, two official plugins are available:
+```sh
+# Firebase Configuration
+VITE_APIKEY=your_firebase_api_key
+VITE_AUTHDOMAIN=your_firebase_auth_domain
+VITE_PROJECTID=your_firebase_project_id
+VITE_STORAGEBUCKET=your_firebase_storage_bucket
+VITE_MESSAGINGSENDERID=your_firebase_messaging_sender_id
+VITE_APPID=your_firebase_app_id
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Base URL of the Application
+VITE_BASEURL=your_base_url
+
+```
+- Run the Application:
+
+```sh
+npm run dev
+```
+
+# Features:-
+
+- Add: Logged-in users can easily contribute to add new painting and drawing-related content to the website
+
+- Delete: Users possess the capability to remove their own contributed content 
+
+- Update: Users have the flexibility to modify existing painting and drawing-related data, enabling them to refine artwork details, amend comments, or update profile information.
+
+
+
+## Technologies Used
+- Frontend: React , tailwind
+- Backend: Express
+- Database: MongoDB
+- Hosting & Authentication: Firebase
+- Token Management: JWT (JSON Web Tokens)
+
