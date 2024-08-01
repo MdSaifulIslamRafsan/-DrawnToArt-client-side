@@ -7,59 +7,51 @@ import loading from "../assets/loading.json";
 import Lottie from "lottie-react";
 
 const MyArtAndCarftList = () => {
+
   const { user } = useContext(AuthContext);
   const loadedCraftItems = useLoaderData();
   let isExist = loadedCraftItems.filter((item) => item?.email === user?.email);
-
-  const [craftItems ,  setCraftItems] = useState(isExist);
-
   
+  const [craftItems, setCraftItems] = useState(isExist);
+  const [customization, setCustomization] = useState(craftItems);
+
+  const sortedYesOrNo = craftItems.filter((sorted) => sorted?.customization ===  customization );
+ 
+  const datas = sortedYesOrNo.length === 0 ? craftItems : sortedYesOrNo;
   const navigation = useNavigation();
-  if(navigation.state === "loading"){
-    return <Lottie className="h-72" animationData={loading} loop={true} />
+  if (navigation.state === "loading") {
+    return <Lottie className="h-72" animationData={loading} loop={true} />;
   }
-
-
-  /* const handleCustomization = (value) => {
-    console.log(value);
-    if (value === "yes") {
-         isExist.filter(item => item?.customization === "Yes")
-    }
-    else if(value === "no"){
-        isExist.filter(item => item?.customization === "No")
-    }
-  };
- */
 
   const handleDelete = (id) => {
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-        fetch(`https://server-side-teal.vercel.app/craftItems/${id}` , {
-            method : "DELETE"
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://server-side-teal.vercel.app/craftItems/${id}`, {
+          method: "DELETE",
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.deletedCount > 0){
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-                const remaining = craftItems.filter(item=> item?._id !== id);
-                setCraftItems(remaining);
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              const remaining = craftItems.filter((item) => item?._id !== id);
+              setCraftItems(remaining);
             }
-        })
-        }
-      });
-  }
+          });
+      }
+    });
+  };
 
   return (
     <div className="mx-5">
@@ -67,19 +59,21 @@ const MyArtAndCarftList = () => {
 
       <div className="flex justify-center my-10 ">
         <details className="dropdown">
-          <summary className="m-1 btn">customization</summary>
-          <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-            <li onClick={() => handleCustomization("yes")}>
+          <summary className="btn m-1">customization</summary>
+          <ul  className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            <li onClick={()=>setCustomization('All')}>
+              <a>All</a>
+            </li>
+            <li onClick={()=>setCustomization('Yes')}>
               <a>Yes</a>
             </li>
-            <li onClick={() => handleCustomization("no")}>
+            <li onClick={()=>setCustomization('No')}>
               <a>No</a>
             </li>
           </ul>
         </details>
-     
       </div>
-      {craftItems.map((item) => (
+      {datas.map((item) => (
         <div
           key={item?._id}
           className=" mx-auto bg-white rounded-xl shadow-md overflow-hidden my-5"
@@ -109,8 +103,16 @@ const MyArtAndCarftList = () => {
                 stockStatus :- {item?.stockStatus}
               </p>
               <div className="mt-4">
-                <Link to={`/update/${item?._id}`} className="btn bg-green-500 text-white">Update</Link>
-                <button onClick={()=>handleDelete(item?._id)} className="btn ml-4 bg-green-500 text-white">
+                <Link
+                  to={`/update/${item?._id}`}
+                  className="btn bg-green-500 text-white"
+                >
+                  Update
+                </Link>
+                <button
+                  onClick={() => handleDelete(item?._id)}
+                  className="btn ml-4 bg-green-500 text-white"
+                >
                   Delete
                 </button>
               </div>
